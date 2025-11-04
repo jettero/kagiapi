@@ -70,11 +70,8 @@ class KagiClient:
         response.raise_for_status()
         return response.json()
 
-    def fastgpt(self, query: str, cache: Optional[bool] = True) -> FastGPTResponse:
+    def fastgpt(self, query: str) -> FastGPTResponse:
         data: Dict[str, Union[int, str]] = {"query": query}
-
-        if cache is not None:
-            data["cache"] = "true" if cache else "false"
 
         response = self.session.post(KagiClient.BASE_URL + "/fastgpt", json=data)
         response.raise_for_status()
